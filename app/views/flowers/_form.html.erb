@@ -1,0 +1,30 @@
+<%= form_for(@flower, :html => {:class => "form-horizontal"}) do |f| %>
+  <% if @flower.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@flower.errors.count, "error") %> prohibited this flower from being saved:</h2>
+
+      <ul>
+      <% @flower.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="control-group">
+    <%= f.label :name, :class => "control-label" %>
+    <div class="controls">
+      <%= f.text_field :name %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :cosmId, :class => "control-label" %>
+    <div class="controls">
+      <%= f.text_field :cosmId %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.submit  :class => "btn btn-primary" %>
+    <%= link_to 'Back', flowers_path, :class => "btn" %>
+  </div>
+<% end %>
