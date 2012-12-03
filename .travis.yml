@@ -1,0 +1,9 @@
+# let's see if comments work
+
+language: ruby
+rvm:
+  - 1.9.2
+bundler_args: "--without development"
+before_install:
+  - gem install bundler --pre
+script: "RAILS_ENV=test bundle exec rake rspec spec"
