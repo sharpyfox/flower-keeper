@@ -8,11 +8,20 @@
   </tr>
 
 <% @flowers.each do |flower| %>
-  <tr>
-    <td><%= link_to 'Show', flower %></td>
-    <td><%= link_to 'Edit', edit_flower_path(flower) %></td>
-    <td><%= link_to 'Destroy', flower, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
+  <% @backgroundcolor = "lightgrey" %>
+  <div class = "span12" style = "background-color:<%= @backgroundcolor %>; margin-bottom:10px">
+    <div class = "span5" style ="padding-left:20px">
+      <h3><%= flower.name %></h3>
+    </div>
+
+    <div class = "span4">
+      <h1>92%</h1>
+    </div>
+
+    <div class = "span3" style = "margin-top:17px; text-align:center">
+      <%= link_to 'График', flowers_path, :class => "btn btn-success" %>
+    </div>
+  </div>
 <% end %>
 </table>
 
