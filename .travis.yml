@@ -6,4 +6,5 @@ rvm:
 bundler_args: "--without development"
 before_install:
   - gem install bundler --pre
+  - RAILS_ENV=test bundle exec rake db:migrate
 script: "RAILS_ENV=test rspec spec"
