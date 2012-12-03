@@ -3,8 +3,12 @@
 language: ruby
 rvm:
   - 1.9.2
+env:
+  - DB=postgresql
+script: 
+  - RAILS_ENV=test bundle exec rake db:migrate --trace
+  - bundle exec rake db:test:prepare
+  - bundle exec rspec spec/
+before_script:
+  - psql -c 'create database my_app_test' -U postgres
 bundler_args: "--without development"
-before_install:
-  - gem install bundler --pre
-  - RAILS_ENV=test bundle exec rake db:migrate
-script: "RAILS_ENV=test rspec spec"
