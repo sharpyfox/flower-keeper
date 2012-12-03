@@ -1,4 +1,4 @@
-== Welcome to Rails
+== Welcome to Rails  {<img src="https://secure.travis-ci.org/sharpyfox/flower-keeper.png?branch=master" alt="Build Status" />}[https://travis-ci.org/sharpyfox/flower-keeper]
 
 Rails is a web-application framework that includes everything needed to create
 database-backed web applications according to the Model-View-Control pattern.
