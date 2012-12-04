@@ -1,4 +1,6 @@
 ﻿class FlowersController < ApplicationController
+	before_filter :take_feed
+
 	# GET /flowers
 	# GET /flowers.json
 	def index
@@ -84,4 +86,10 @@
 			format.json { head :no_content }
 		end
 	end
+
+	private
+		def take_feed
+    		response = Cosm::Client.get('/v2/feeds/89489.json', :headers => {"X-ApiKey" => COSM_API_KEY})
+    		@feed = Feed.new(response.body)
+    	end
 end
