@@ -10,13 +10,14 @@ module FlowersHelper
 	end
 
 	def humidityToColor(aHumidity)
-		blue = (aHumidity % 50) * 255 / 100
 		if aHumidity > 50
-			green = (aHumidity - 50) * 255 / 100
 			red = 0
+			green = ((aHumidity.to_f - 50.0) / 50.0 * 255.0).round
+			blue = ((100 - aHumidity.to_f) / 50.0 * 255.0).round
 		else
+			red = ((50.0 - aHumidity.to_f) / 50.0 * 255.0).round
 			green = 0
-			red = (50 - aHumidity) * 255 / 100
+			blue = ((aHumidity.to_f) / 50.0 * 255.0).round
 		end
 
 		return  "##{sprintf("%02X", red)}#{sprintf("%02X", green)}#{sprintf("%02X", blue)}"

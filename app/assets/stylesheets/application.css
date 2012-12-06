@@ -55,3 +55,23 @@ div.flash.warning, .conflict {
 #error_explanation h2, #error_explanation p { display: none; }
 
 .conflict-details {font-size:80%;}
+
+.contextual {
+  float:right;
+}
+
+.container {
+  position:relative; 
+  height:60px;
+  margin-bottom:10px;
+}
+
+.color_box {
+  opacity: 0.4;
+  height:100%;
+}
+
+.margin_button {
+  margin-top:17px; 
+  text-align:center
+}

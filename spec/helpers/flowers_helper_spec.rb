@@ -11,5 +11,20 @@ require 'spec_helper'
 #   end
 # end
 describe FlowersHelper do
-  pending "add some examples to (or delete) #{__FILE__}"
+  	it "50% must be blue" do
+  		assert_equal "#0000FF", humidityToColor(50)
+  	end
+
+  	it "100% must be green" do
+  		assert_equal "#00FF00", humidityToColor(100)
+  	end
+
+  	it "0% must be red" do
+  		assert_equal "#FF0000", humidityToColor(0)
+  	end
+
+  	it "25% must be some color" do
+  		assert_equal "#800080", humidityToColor(25)
+  		assert_equal "#800080", humidityToColor(75)
+  	end
 end

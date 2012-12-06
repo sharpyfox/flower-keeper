@@ -35,6 +35,7 @@ end
 
 gem 'jquery-rails'
 gem 'cosm-rb'
+gem "ox", :git => 'git://github.com/ohler55/ox.git'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

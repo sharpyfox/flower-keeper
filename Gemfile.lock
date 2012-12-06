@@ -1,3 +1,9 @@
+GIT
+  remote: git://github.com/ohler55/ox.git
+  revision: 3a19f16c62d59621972148eb9469a3a61902038d
+  specs:
+    ox (1.7.1a1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -69,7 +75,6 @@ GEM
     multi_xml (0.5.1)
     nokogiri (1.5.5)
     nokogiri (1.5.5-x86-mingw32)
-    ox (1.7.0)
     pg (0.14.1)
     pg (0.14.1-x86-mingw32)
     polyglot (0.3.3)
@@ -134,6 +139,7 @@ GEM
       nokogiri (>= 1.2.0)
       rack (>= 1.0)
       rack-test (>= 0.5.3)
+    yajl-ruby (1.1.0)
     yajl-ruby (1.1.0-x86-mingw32)
 
 PLATFORMS
@@ -143,6 +149,7 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   cosm-rb
   jquery-rails
+  ox!
   pg
   rails (= 3.2.9)
   rspec-rails
