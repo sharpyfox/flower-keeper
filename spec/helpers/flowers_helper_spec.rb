@@ -25,6 +25,6 @@ describe FlowersHelper do
 
   	it "25% must be some color" do
   		assert_equal "#800080", humidityToColor(25)
-  		assert_equal "#800080", humidityToColor(75)
+  		assert_equal "#008080", humidityToColor(75)
   	end
 end
