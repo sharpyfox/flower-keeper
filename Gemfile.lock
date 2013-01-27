@@ -56,6 +56,7 @@ GEM
     execjs (1.4.0)
       multi_json (~> 1.0)
     fastercsv (1.5.5)
+    googlecharts (1.6.8)
     hike (1.2.1)
     httparty (0.9.0)
       multi_json (~> 1.0)
@@ -148,6 +149,7 @@ PLATFORMS
 DEPENDENCIES
   coffee-rails (~> 3.2.1)
   cosm-rb
+  googlecharts
   jquery-rails
   ox!
   pg

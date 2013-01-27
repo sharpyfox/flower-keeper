@@ -1,5 +1,7 @@
-﻿class FlowersController < ApplicationController
-	before_filter :take_feed
+﻿require 'gchart'
+
+class FlowersController < ApplicationController
+	before_filter :take_feed, :only => [:index]
 
 	# GET /flowers
 	# GET /flowers.json
@@ -18,7 +20,7 @@
 	def show
 		@title = "Просмотр"
 		@flower = Flower.find(params[:id])
-
+		
 		respond_to do |format|
 			format.html # show.html.erb
 			format.json { render json: @flower }
@@ -91,5 +93,10 @@
 		def take_feed
     		response = Cosm::Client.get('/v2/feeds/89489.json', :headers => {"X-ApiKey" => COSM_API_KEY})
     		@feed = Feed.new(response.body)
+    	end
+
+    	def take_data
+    		response = Cosm::Client.get('/v2/feeds/89489/datastreams/1?start=2012-12-18T00:00:00Z&end=2012-12-18T23:59:59Z&interval=60', :headers => {"X-ApiKey" => COSM_API_KEY})
+    		@datastream = Cosm::Datastream.new(response)			
     	end
 end
