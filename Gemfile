@@ -35,8 +35,9 @@ end
 
 gem 'jquery-rails'
 gem 'cosm-rb'
-gem "ox", :git => 'git://github.com/ohler55/ox.git'
+gem "ox"
 gem 'googlecharts'
+gem 'twitter-bootstrap-rails'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
