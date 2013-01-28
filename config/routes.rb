@@ -57,4 +57,6 @@ Flowerkeeper::Application.routes.draw do
   # match ':controller(/:action(/:id))(.:format)'
 
   resources :flowers
+
+  root :to => 'flowers#index'
 end
