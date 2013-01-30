@@ -155,6 +155,7 @@ void loop () {
   
   if (millis() > timer) {    
     timer = millis() + PushTimeout * 1000;                                         // отправка новых данных на сервер каждые 10 секунд
+    
     ReadHumidity();
     PushData();
   }

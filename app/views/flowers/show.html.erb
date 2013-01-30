@@ -1,33 +1,37 @@
 ﻿<p id="notice"><%= notice %></p>
 
+<script src="http://datejs.googlecode.com/files/date.js"></script>
 <script src="http://d23cj0cdvyoxg0.cloudfront.net/cosmjs-1.0.0.min.js"></script>  
 
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript">
       google.load("visualization", "1", {packages:["corechart"]});
       google.setOnLoadCallback(drawChart);
+
+      function humanizeDate(aDate) {
+         return Date.parseExact(aDate.split(".")[0],"yyyy-MM-ddTHH:mm:ss").toString("MM/dd HH:mm")
+      }
+
       function drawChart() {
         cosm.setKey( "DuEKET_N9sKpxolqa9JUEJ7y8AOSAKxMN1hGaWJRNlVqYz0g" );
-        var data_array = [ ['DateTimeStamp', 'Humidity'] ];
+        var data_array = [ ['DateTimeStamp', 'Влажность'] ];
 
-        cosm.datapoint.history ("89489", "3", {
-          "start" : "2012-12-14T00:00:00Z", 
-          "end" : "2012-12-18T23:59:59Z", 
+        cosm.datapoint.history ("89489", "<%=@flower.id%>", {
+          "start" : "<%=DateTime.now - 5%>",
+          "end" : "<%=DateTime.now%>", 
           "interval" : "300", 
           "limit" : "1000"
-        }, function( data ) {  
-          //console.log( data.length ); // Logs value changes in realtime  
+        }, function( data ) {
+          data_array.push([humanizeDate(data[0]['at']), parseInt(data[0]['value']) - 3]);
 
-          data_array.push([data[0]['at'], parseInt(data[0]['value']) - 3]);
-
-          for (var i = 0; i < data.length; i++) {
-            data_array.push([data[i]['at'], parseInt(data[i]['value'])]);
+          for (var i = 0; i < data.length; i++) {            
+            data_array.push([humanizeDate(data[i]['at']), parseInt(data[i]['value'])]);
           };
 
-          data_array.push([data[data.length - 1]['at'], parseInt(data[data.length - 1]['value']) + 1]);
+          data_array.push([humanizeDate(data[data.length - 1]['at']), parseInt(data[data.length - 1]['value']) + 1]);
 
           var options = {
-            title: 'График увлажнённости за последние 7 дней'
+            title: 'График увлажнённости за последние 5 дней'
           };
 
           var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
@@ -37,10 +41,6 @@
     </script>
 
     <div id="chart_div"></div>
-
-    <%= @data.to_json() %>
-
-    <%= @chart %>
 
     <br/>
     <br/>
