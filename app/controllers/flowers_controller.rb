@@ -1,6 +1,4 @@
-﻿require 'gchart'
-
-class FlowersController < ApplicationController
+﻿class FlowersController < ApplicationController
 	before_filter :take_feed, :only => [:index]
 
 	# GET /flowers
