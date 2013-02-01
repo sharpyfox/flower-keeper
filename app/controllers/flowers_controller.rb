@@ -9,6 +9,12 @@ class FlowersController < ApplicationController
 		@title = "Главная"
 		@flowers = Flower.all
 
+		@parsed_data = []
+		@flowers.each do |flower|
+			points = take_data(flower.id)
+			@parsed_data[flower.id] = get_points(points)
+		end
+
 		respond_to do |format|
 			format.html # index.html.erb
 			format.json { render json: @flowers }
@@ -20,6 +26,10 @@ class FlowersController < ApplicationController
 	def show
 		@title = "Просмотр"
 		@flower = Flower.find(params[:id])
+
+		data = take_data(@flower.id);
+
+		@parsed_data = get_points(data)
 		
 		respond_to do |format|
 			format.html # show.html.erb
@@ -95,8 +105,15 @@ class FlowersController < ApplicationController
     		@feed = Feed.new(response.body)
     	end
 
-    	def take_data
-    		response = Cosm::Client.get('/v2/feeds/89489/datastreams/1?start=2012-12-18T00:00:00Z&end=2012-12-18T23:59:59Z&interval=60', :headers => {"X-ApiKey" => COSM_API_KEY})
-    		@datastream = Cosm::Datastream.new(response)			
+    	def take_data(feed_id)
+    		responce = Cosm::Client.get("/v2/feeds/89489/datastreams/#{feed_id}?start=#{DateTime.now - 5}&end=#{DateTime.now}&interval=300", :headers => {"X-ApiKey" => COSM_API_KEY})
+    		@datastream = Cosm::Datastream.new(responce)			
+    	end
+
+    	def get_points(data)
+    		points = data.datapoints.map{|x| [DateTime.iso8601(x.at).strftime('%s').to_i * 1000, x.value.to_f()] }
+			points << [DateTime.now.strftime('%s').to_i * 1000, data.current_value.to_f()]
+
+			points
     	end
 end
