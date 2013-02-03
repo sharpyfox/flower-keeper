@@ -7,10 +7,10 @@
 		@title = "Главная"
 		@flowers = Flower.all
 
-		@parsed_data = []
+		@parsed_data = {}
 		@flowers.each do |flower|
-			points = take_data(flower.id)
-			@parsed_data[flower.id] = get_points(points)
+			points = take_data(flower.cosmId)
+			@parsed_data[flower.cosmId] = get_points(points)
 		end
 
 		respond_to do |format|
@@ -25,7 +25,7 @@
 		@title = "Просмотр"
 		@flower = Flower.find(params[:id])
 
-		data = take_data(@flower.id);
+		data = take_data(@flower.cosmId);
 
 		@parsed_data = get_points(data)
 		

@@ -6,7 +6,7 @@
 		last_update_dt = 10.days.ago		
 
 		aFeed.datastreams.each do |stream|
-			if DateTime.iso8601(stream.updated) > last_update_dt
+			if (stream.updated) && (DateTime.iso8601(stream.updated) > last_update_dt)
 				last_update_dt = DateTime.iso8601(stream.updated)
 			end
 		end

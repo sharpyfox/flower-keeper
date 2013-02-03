@@ -4,7 +4,7 @@
       <% last_update_data = get_last_updated_datetime(@feed).in_time_zone('Moscow') %>
 
       <% @flowers.each do |flower| %>
-        <% @chart.series(:name=>flower.name, :data=> @parsed_data[flower.id]) %>
+        <% @chart.series(:name=>flower.name, :data=> @parsed_data[flower.cosmId]) %>
       <%end%>
 
       <%= high_chart("chart_container", @chart) do |c| %>
