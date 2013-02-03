@@ -75,3 +75,33 @@ div.flash.warning, .conflict {
   margin-top:17px; 
   text-align:center
 }
+
+span.status {
+  display: block;
+  background: grey;
+  color: #fff;
+  width: 14px;
+  height: 20px;
+  line-height: 20px;
+  background: url("/assets/grey.png") no-repeat 0px center;
+}
+
+span.status-up{
+  background:url("/assets/green.png") no-repeat 0px center
+}
+
+span.status-down{
+  background:url("/assets/red.png") no-repeat 0px center
+}
+
+.fl {
+  float: left;
+}
+
+.mt20{
+  margin-top: 20px;
+}
+
+.pl20{
+  padding-left: 20px;
+}

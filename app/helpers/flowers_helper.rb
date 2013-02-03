@@ -2,6 +2,18 @@
 	LABEL_COLOR = 'black'
 	PLOTS_OPACITY = 0.2
 
+	def get_last_updated_datetime(aFeed)
+		last_update_dt = 10.days.ago		
+
+		aFeed.datastreams.each do |stream|
+			if DateTime.iso8601(stream.updated) > last_update_dt
+				last_update_dt = DateTime.iso8601(stream.updated)
+			end
+		end
+
+		return last_update_dt
+	end
+
 	def getHumidity(aFlower, aFeed)
 		aFeed.datastreams.each do |stream|
 			if aFlower.cosmId == stream.id
@@ -90,5 +102,17 @@
 		add_band(bands, 50, 70,  "rgba(0, 51, 204, #{PLOTS_OPACITY})", 'Подсыхает');
 		add_band(bands, 70, 90,  "rgba(0, 204, 51, #{PLOTS_OPACITY})", 'Хорошо полит');
 		add_band(bands, 90, 100, "rgba(0, 255, 0, #{PLOTS_OPACITY})",  'Как вода');
+	end
+
+	def isActualData?(datetime)
+		datetime > 10.minutes.ago
+	end
+
+	def status_from_bool(bool_value)
+		if bool_value
+			'up'
+		else
+			'down'
+		end
 	end
 end

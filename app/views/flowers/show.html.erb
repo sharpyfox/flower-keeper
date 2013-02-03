@@ -8,7 +8,7 @@
       <%= high_chart("chart_container", @chart) do |c| %>
         <%= raw "options.tooltip.formatter = function() {
                         return ''+
-                        Highcharts.dateFormat('%e. %b %Y, %H:%m', this.x) +': '+ this.y +'%';
+                        Highcharts.dateFormat('%e. %b %Y, %H:%M', this.x) +': '+ this.y +'%';
                 }"  %>    
       <% end %>
     </div>

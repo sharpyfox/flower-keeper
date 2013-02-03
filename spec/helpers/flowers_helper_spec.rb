@@ -27,4 +27,20 @@ describe FlowersHelper do
   		assert_equal "#800080", humidityToColor(25)
   		assert_equal "#008080", humidityToColor(75)
   	end
+
+    it "More than 10 minutes must be broken" do      
+      isActualData?(11.minutes.ago).should be_false
+    end
+
+    it "More than 10 minutes must be correct" do      
+      isActualData?(1.minutes.ago).should be_true
+    end
+
+    it 'true must be "up"' do
+      status_from_bool(true).should == 'up'
+    end
+
+    it 'true must be "down"' do
+      status_from_bool(false).should == 'down'
+    end
 end

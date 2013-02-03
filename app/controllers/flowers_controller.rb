@@ -104,13 +104,13 @@
     	end
 
     	def take_data(feed_id)
-    		responce = Cosm::Client.get("/v2/feeds/89489/datastreams/#{feed_id}?start=#{DateTime.now - 5}&end=#{DateTime.now}&interval=300", :headers => {"X-ApiKey" => COSM_API_KEY})
+    		responce = Cosm::Client.get("/v2/feeds/89489/datastreams/#{feed_id}?start=#{5.days.ago.strftime('%Y-%m-%dT%H:%M:%S')}&end=#{0.seconds.ago.strftime('%Y-%m-%dT%H:%M:%S')}&interval=300&limit=1000", :headers => {"X-ApiKey" => COSM_API_KEY})
     		@datastream = Cosm::Datastream.new(responce)			
     	end
 
     	def get_points(data)
-    		points = data.datapoints.map{|x| [DateTime.iso8601(x.at).strftime('%s').to_i * 1000, x.value.to_f()] }
-			points << [DateTime.now.strftime('%s').to_i * 1000, data.current_value.to_f()]
+    		points = data.datapoints.map{|x| [(DateTime.iso8601(x.at).in_time_zone('Moscow')).strftime('%s').to_i * 1000, x.value.to_f()] }
+			points << [(DateTime.now.in_time_zone('Moscow')).strftime('%s').to_i * 1000, data.current_value.to_f()]
 
 			points
     	end

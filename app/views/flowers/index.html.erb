@@ -1,6 +1,8 @@
   <% create_chart %>  
   <div>
     <div id = "chart_container">
+      <% last_update_data = get_last_updated_datetime(@feed).in_time_zone('Moscow') %>
+
       <% @flowers.each do |flower| %>
         <% @chart.series(:name=>flower.name, :data=> @parsed_data[flower.id]) %>
       <%end%>
@@ -8,18 +10,20 @@
       <%= high_chart("chart_container", @chart) do |c| %>
         <%= raw "options.tooltip.formatter = function() {
                         return ''+
-                        Highcharts.dateFormat('%e. %b %Y, %H:%m', this.x) +': '+ this.y +'%';
+                        Highcharts.dateFormat('%e. %b %Y, %H:%M', this.x) +': '+ this.y +'%';
                 }"  %>    
       <% end %>
     </div>
   </div>
 
-<div class = "contextual" style="margin-top:20px">
+<div class = "contextual mt20">
   <i class="icon-plus"></i>
   <%= link_to 'Добавить цветочек', new_flower_path %>
 </div>
 
-<h2>Цветочки</h2>
+<span class="status status-<%=status_from_bool(isActualData?(last_update_data))%> fl mt20" title="<%=last_update_data.strftime('%Y-%m-%d %H:%M')%>"></span>
+
+<h2 class = "pl20">Цветочки</h2> 
 
 <% @flowers.each do |flower| %>
   <% @backgroundcolor = "lightgrey" %>
