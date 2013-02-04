@@ -42,7 +42,7 @@ uint32_t hum;
 // *******************************************************************
 // Функция, получающая данные с датчика влажности
 // *******************************************************************
-int moistureValue(int aPinNumber){
+float moistureValue(int aPinNumber){
   const int NUMBER_OF_MEASUREMENTS = 5;
   int zValue = 0;
   int zMax = 0;
@@ -65,23 +65,15 @@ int moistureValue(int aPinNumber){
 // Метод, читающий данные с аналоговых входов
 // *******************************************************************
 void ReadHumidity () {
-  if (hum - 10 < 0)
-  {
-    hum = 1036800;
-  }
-  else
-  {
-    hum = hum - 10;
-  }
-    
   HumidityValues[0] = moistureValue(0);
-  HumidityValues[1] = random(0, 100);
-  HumidityValues[2] = random(0, 100);
+  HumidityValues[1] = moistureValue(1);
+  HumidityValues[2] = moistureValue(2);
 }
 
 void PushData () {
   Serial.println("Push data in cloud");
-  
+
+  Stash::cleanup();  
   byte zMessage = stash.create();
   byte zIndex;
   
